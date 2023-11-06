@@ -1,0 +1,27 @@
+Where is the assertEquals method defined? What does it do? Can we use assertEquals for more than just int types? (Hint: Consult the API for JUnit)
+The assertEquals method comes from the java j unit library from the Assertions class. You use it in JUnit tests, when you have a set of data and know a specific value of what your data set should hold you can prove whether your method is correct with using assertEquals by defining the value you expect and comparing it to the result that your method gives with the particular data set. JUnit.org shows that you can use assertEquals on strings , objects, and more.
+
+Briefly describe what each of the three tests is checking.
+The first test: emptyArray is testing whether or not array is empty. All difference values should be positive. But in the method if the array length is 1 or less there cannot be a difference of values so it will return -1.
+The second test: allArrayElementsEqual is testing whether or not the smallest difference is 0 because the minimum difference should be 0 if all the elements are equal.
+The third test: smallRandomArrayElements is testing small elements to ensure that the difference is correct in all conditions. It demonstrated that the method was finding differences of negative values. Differences should be a range between two values so it shouldn't be negative. 
+
+Why is our unimplemented findSmallestDiff method passing one of the tests?
+The unimplemented findSmallestDiff method was passing the allArrayElementsEqual test because the array was only returning 0 which would be equal the expected 0 when all elements in the array are the same number because all the differences should be 0.
+
+Why are we failing the third test? How should our method be modified to correct this?
+We are failing this because we are find a negative difference value from 0 to -8. This is not a proper difference so we must modify the method to create absolute values for the differences.
+
+What is the appropriate call to assertEquals for your new test (test 4)?
+arr4 = new int[] {-1 ,-7, - 9 , -3, -2};
+@Test
+    public void allNumbersAreNegative(){
+        assertEquals(1, DiffUtil.findSmallestDiff(arr4));
+    }
+
+Provide one more test (test 5) for the findSmallestDiff method. Briefly describe your test and write the call to assertEquals here.
+The test is assure that large values will be appropriately dealt with with the method.
+arr5 = new int[] {0, -2345678, 987654, 34567892, -1000000};
+
+Briefly describe your unit tests for Assignment 1.
+
