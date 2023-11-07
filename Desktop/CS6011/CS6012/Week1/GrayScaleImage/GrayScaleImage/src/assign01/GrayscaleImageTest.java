@@ -102,3 +102,20 @@ class GrayscaleImageTest {
         assertEquals(testSS,TestSExpected);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//SQUARIFIED WHEN ALREADY SQUARED
+//EXCEPTION GET PIXEL
+//MAKE SURE BOOLEANS CAN RETURN EACH OPTION
+//TESTBLACK IMAGE
+//SINGLEVALUE FOR MIRROR

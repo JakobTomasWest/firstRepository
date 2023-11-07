@@ -93,7 +93,7 @@ public class GrayscaleImage {
         //I am given a Grayscale image that is denoted by a 2D array ImageData
         //for each row and column I need to be able to geta value from 0-255 or the value at their combined coordinates\
         //check if x and y are within the bounds of the imageData array
-        if(x <0 || x >= imageData[0].length || y < 0 || y > imageData.length){
+        if(x <0 || x >= imageData[0].length || y < 0 || y >= imageData.length){
             throw new IllegalArgumentException("The pixel is not within the image width/height parameters");
         } else {
             //you get the [x][y] but you need to switch to get the [row value] [column value]
@@ -110,6 +110,7 @@ public class GrayscaleImage {
      */
     @Override
     public boolean equals(Object other){
+        //check to make sure it's the same type
         if(!(other instanceof GrayscaleImage)){
             return false;
         }
@@ -138,7 +139,6 @@ public class GrayscaleImage {
         }
         return true;
 
-
     }
 
 
@@ -154,11 +154,12 @@ public class GrayscaleImage {
             // check the value at each x position in the imageData.length and sum the values
             for(int x = 0; x < imageData[y].length; x++){
                 double number =imageData[y][x];
-                totalSum = totalSum + number;
-                System.out.println(number);
+                totalSum += number;
+                // totalSum += imageData[y][x];
+
             }
             //add number of pixels / values at each Y for each row
-            totalPixels = totalPixels + imageData[y].length;
+            totalPixels += imageData[y].length;
             System.out.println("total number of pixels: " +totalPixels);
         }
 
@@ -175,7 +176,7 @@ public class GrayscaleImage {
      * @return a GrayScale image with pixel data uniformly rescaled so that its averageBrightness() is 127
      */
     public GrayscaleImage normalized(){
-        //copy the data from the original so that the test is accurate
+        //(make a... of) copy the data from the original so that the test is accurate to our original image
         GrayscaleImage grayscaleImage = new GrayscaleImage(this.imageData);
 //        int totalPixels =0;
 //        double totalSum=0;
@@ -247,6 +248,7 @@ public class GrayscaleImage {
     public GrayscaleImage cropped(int startRow, int startCol, int width, int height){
         //throw if specified rectangle goes outside the bounds of the original image
         // the crop cannot start before the image does and it also can't be larger than the row/column parameters
+        //see if the start itself is outside of the imageData bounds ( not with the addition of the h/w);
         if (startRow < 0 || startCol < 0 || startRow + height > this.imageData.length || startCol + width > this.imageData[0].length) {
             throw new IllegalArgumentException("The specified rectangle goes outside the bounds of the image");
         }
@@ -297,7 +299,9 @@ public class GrayscaleImage {
                 }
                 //after each loop we have to iterate to the new y position
                 // we need to iterate the starting yvalue after each row
-                startingYvalue = startingYvalue + startingYvalue;
+                //startingYvalue = startingYvalue + 1; this is adding 0 again---
+                startingYvalue ++;
+//                startingYvalue = startingYvalue + startingYvalue;
             }
 
 
